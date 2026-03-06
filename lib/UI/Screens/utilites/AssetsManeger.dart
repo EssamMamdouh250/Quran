@@ -2,8 +2,8 @@ abstract final class AssetsManager {
   static const IcHadeth = "assets/images/ic_hadeth.svg";
   static const IcRadio = "assets/images/ic_radio.svg";
   static const IcSebha = "assets/images/ic_sebha.svg";
-  static const QuranRightCorner = "assets/images/img_right_corner.svg";
-  static const QuranLeftCorner = "assets/images/img_left_corner.svg";
+  static const QuranRightCorner = "assets/images/rightCornergold.png";
+  static const QuranLeftCorner = "assets/images/LeftCornerGold.png";
   static const hadethLeftCorner = "assets/images/corner_right_black.png";
   static const mosqBlack = "assets/images/redingBlack.png";
 
