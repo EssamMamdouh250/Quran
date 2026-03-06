@@ -20,11 +20,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-         Homescreen.routeName: (_) => const Homescreen(),
-         Splash.routeName: (_) => const Splash(),
+        Homescreen.routeName: (_) => const Homescreen(),
+        Splash.routeName: (_) => const Splash(),
       },
       initialRoute: Splash.routeName,
-     
     );
   }
 }
