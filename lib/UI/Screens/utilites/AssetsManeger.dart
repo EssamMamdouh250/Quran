@@ -6,7 +6,6 @@ abstract final class AssetsManager {
   static const QuranLeftCorner = "assets/images/LeftCornerGold.png";
   static const hadethLeftCorner = "assets/images/corner_right_black.png";
   static const mosqBlack = "assets/images/redingBlack.png";
-
   static const IcTime = "assets/images/ic_time.svg";
   static const MostRecent = "assets/images/img_most_recent.svg";
   static const Vector = "assets/images/Vector.svg";
@@ -17,5 +16,8 @@ abstract final class AssetsManager {
   static const SurasNum = "assets/images/Suras_Num.png";
   static const tagMahl = "assets/images/TagMahal.jpg";
   static const mosq2 = "assets/images/Mousq2.png";
+  static const  SurasDetails = "assets/images/img_bottom_decoration.png";
   static const reading = "assets/images/reading.png";
+  static const  Backgroundsepha = "assets/images/Background_sepha.png";
+  static const  Sephabody = "assets/images/Sebha.png";
 }
