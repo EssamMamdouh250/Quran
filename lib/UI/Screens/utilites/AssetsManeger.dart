@@ -16,8 +16,9 @@ abstract final class AssetsManager {
   static const SurasNum = "assets/images/Suras_Num.png";
   static const tagMahl = "assets/images/TagMahal.jpg";
   static const mosq2 = "assets/images/Mousq2.png";
-  static const  SurasDetails = "assets/images/img_bottom_decoration.png";
+  static const SurasDetails = "assets/images/img_bottom_decoration.png";
   static const reading = "assets/images/reading.png";
-  static const  Backgroundsepha = "assets/images/Background_sepha.png";
-  static const  Sephabody = "assets/images/Sebha.png";
+  static const Backgroundsepha = "assets/images/Background_sepha.png";
+  static const Sephabody = "assets/images/Sebha.png";
+  static const backgroundtimeScreen = "assets/images/BackgroundtimeScreen.png";
 }
