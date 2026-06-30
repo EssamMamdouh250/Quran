@@ -24,7 +24,8 @@ class _GetLocationState extends State<GetLocation> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LocationCubit()..getUserLocation()),
-        BlocProvider(create: (context) => AladanCubit(TimingRepe(aladhanApi: aladhanApi)),
+        BlocProvider(
+          create: (context) => AladanCubit(TimingRepe(aladhanApi: aladhanApi)),
         ),
       ],
       child: TimeTab(),
@@ -62,71 +63,247 @@ Widget _buildUI() {
         image: AssetImage(AssetsManager.backgroundtimeScreen),
       ),
     ),
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Image.asset(AssetsManager.ImgLogo, width: 250, height: 170),
-            BlocBuilder<AladanCubit, AladanState>(
-              builder: (context, state) {
-                if (state is AladanInitial) {
-                  return Container(
-                    width: double.infinity,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: AppColors.brown,
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/Group35.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: CircularProgressIndicator(color: Colors.white),
-                  );
-                }
-                if (state is AladanLoaded) {
-                  return Container(
-                    padding: EdgeInsets.all(20),
-                    width: double.infinity,
-                    height: 300,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: AppColors.brown,
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/Group35.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(state.times.date),
-                            Text("Day"),
-                            Text(state.times.hijriDate),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [],
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return SizedBox();
-              },
+    child: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Image.asset(AssetsManager.ImgLogo, width: 250, height: 170),
+                  BlocBuilder<AladanCubit, AladanState>(
+                    builder: (context, state) {
+                      if (state is AladanInitial) {
+                        return Container(
+                          width: double.infinity,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            color: AppColors.brown,
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/Group35.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Center(
+                            child: CircularProgressIndicator(color: Colors.white),
+                          ),
+                        );
+                      }
+                      if (state is AladanLoaded) {
+                        List<Map<String, String>> prayers = [
+                          {"name": "Fajr", "time": state.times.fajr},
+                          {"name": "Sunrise", "time": state.times.sunrise},
+                          {"name": "Dhuhr", "time": state.times.dhuhr},
+                          {"name": "Asr", "time": state.times.asr},
+                          {"name": "Maghrib", "time": state.times.maghrib},
+                          {"name": "Isha", "time": state.times.isha},
+                        ];
+                        return Container(
+                          padding: EdgeInsets.all(20),
+                          width: double.infinity,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40),
+                            color: AppColors.brown,
+                            image: DecorationImage(
+                              image: AssetImage("assets/images/Group35.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      state.times.date,
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Pray Time ",
+                                          style: TextStyle(
+                                            color: AppColors.brown,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          state.times.day,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 50,
+                                    child: Text(
+                                      state.times.hijriDate,
+                                      style: TextStyle(
+                                        color: AppColors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 120,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 6,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    final formatted = formatTime(
+                                      prayers[index]["time"]!,
+                                    );
+      
+                                    return Container(
+                                      margin: EdgeInsets.all(2),
+                                      height: 128,
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: AppColors.brown,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            prayers[index]["name"]!,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+      
+                                          Text(
+                                            formatted["time"]!,
+                                            style: TextStyle(
+                                              fontSize: 32,
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            formatted["period"]!,
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: AppColors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              Text("you should add the alarm"),
+                            ],
+                          ),
+                        );
+                      }
+                      return SizedBox();
+                    },
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+          Text("Azkar", style: TextStyle(color: AppColors.white)),
+      
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    height: 180,
+                    decoration: BoxDecoration(
+                      border: BoxBorder.all(color: AppColors.primary,width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(AssetsManager.eveningazkar),
+                        fit: BoxFit.fitWidth
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        "Evening Azkar",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    height: 180,
+                    decoration: BoxDecoration(
+                      border: BoxBorder.all(color: AppColors.primary,width: 2),
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: AssetImage(AssetsManager.morningazkar),
+                        fit: BoxFit.fitWidth
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text(
+                        "Morning  Azkar",
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     ),
   );
+}
+
+Map<String, String> formatTime(String time) {
+  final parts = time.split(":");
+  int hour = int.parse(parts[0]);
+  String minute = parts[1];
+
+  String period = hour >= 12 ? "PM" : "AM";
+
+  hour = hour % 12;
+  if (hour == 0) hour = 12;
+
+  return {"time": "$hour:$minute", "period": period};
 }

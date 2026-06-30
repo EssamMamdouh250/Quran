@@ -21,4 +21,6 @@ abstract final class AssetsManager {
   static const Backgroundsepha = "assets/images/Background_sepha.png";
   static const Sephabody = "assets/images/Sebha.png";
   static const backgroundtimeScreen = "assets/images/BackgroundtimeScreen.png";
+  static const eveningazkar = "assets/images/EveningAzkar.png";
+  static const morningazkar = "assets/images/MorningAzkar.png";
 }
