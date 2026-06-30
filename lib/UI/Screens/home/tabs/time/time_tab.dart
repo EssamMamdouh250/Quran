@@ -24,8 +24,7 @@ class _GetLocationState extends State<GetLocation> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LocationCubit()..getUserLocation()),
-        BlocProvider(
-          create: (context) => AladanCubit(TimingRepe(aladhanApi: aladhanApi)),
+        BlocProvider(create: (context) => AladanCubit(TimingRepe(aladhanApi: aladhanApi)),
         ),
       ],
       child: TimeTab(),

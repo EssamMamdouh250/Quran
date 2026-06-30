@@ -23,7 +23,7 @@ class _HomescreenState extends State<Homescreen> {
     AhadethTab(),
     SephaTab(),
     RadioTab(),
-    TimeTab(),
+    GetLocation(),
   ];
 
   @override
@@ -36,9 +36,7 @@ class _HomescreenState extends State<Homescreen> {
 
   Widget buildButtomNavigationBar() {
     return Theme(
-      data: ThemeData(
-        canvasColor: AppColors.primary,
-      ),
+      data: ThemeData(canvasColor: AppColors.primary),
       child: BottomNavigationBar(
         selectedItemColor: AppColors.white,
         unselectedItemColor: AppColors.black,
@@ -51,23 +49,23 @@ class _HomescreenState extends State<Homescreen> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.Vector),
-            label: "Quran"
+            label: "Quran",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.IcHadeth),
-            label: "Ahadeth"
+            label: "Ahadeth",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.IcSebha),
-            label: "Sebha"
+            label: "Sebha",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.IcRadio),
-            label: "Radio"
+            label: "Radio",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.IcTime),
-            label: "Times"
+            label: "Times",
           ),
         ],
       ),

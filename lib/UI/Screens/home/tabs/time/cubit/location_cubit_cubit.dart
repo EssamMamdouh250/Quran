@@ -11,13 +11,17 @@ class LocationCubit extends Cubit<LocationCubitState> {
     emit(LocationLoading());
 
     try {
+      print(1);
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
+      print(2);
+
         emit(LocationError("Location services are disabled"));
       }
       LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
+      print(3);
         permission = await Geolocator.requestPermission();
       }
 
