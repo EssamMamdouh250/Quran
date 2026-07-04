@@ -5,10 +5,10 @@ sealed class LocationCubitState {}
 
 final class LocationInitial extends LocationCubitState {}
 
-final class LocationLoading extends LocationCubitState {}
-
 final class LocationLoaded extends LocationCubitState {
-  LocationLoaded();
+  final String city;
+  final String country;
+  LocationLoaded(this.city, this.country);
 }
 
 final class LocationError extends LocationCubitState {

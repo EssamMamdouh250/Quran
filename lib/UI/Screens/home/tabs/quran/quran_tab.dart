@@ -14,10 +14,11 @@ class QuranTab extends StatefulWidget {
 }
 
 class _QuranTabState extends State<QuranTab> {
+
+
   List<int> filterList = List.generate(114, (index) => index);
   void searchsura(String text) {
     filterList.clear();
-
     for (int i = 0; i < 114; i++) {
       if (Constantas.englishQuranSurahs[i].toLowerCase().contains(
             text.toLowerCase(),
@@ -86,7 +87,6 @@ class _QuranTabState extends State<QuranTab> {
       style: TextStyle(color: AppColors.white),
     );
   }
-
   Widget buildsuraslistview() {
     return Expanded(
       child: ListView.separated(
@@ -96,7 +96,7 @@ class _QuranTabState extends State<QuranTab> {
           int suraIndex = filterList[index];
           return InkWell(
             onTap: () async {
-              List<String> suraVerses = await loadSura(index);
+              List<String> suraVerses = await loadSura(suraIndex);
               Navigator.push(
                 context,
                 MaterialPageRoute(

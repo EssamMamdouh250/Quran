@@ -8,20 +8,22 @@ class LocationCubit extends Cubit<LocationCubitState> {
   LocationCubit() : super(LocationInitial());
 
   Future<void> getUserLocation() async {
-    emit(LocationLoading());
+    print("button pressed");
+    emit(LocationInitial());
 
     try {
       print(1);
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-      print(2);
+        print(2);
 
         emit(LocationError("Location services are disabled"));
+        return;
       }
       LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-      print(3);
+        print(3);
         permission = await Geolocator.requestPermission();
       }
 
@@ -52,7 +54,7 @@ class LocationCubit extends Cubit<LocationCubitState> {
 
       print("done");
 
-      emit(LocationLoaded());
+      emit(LocationLoaded(country, city));
     } catch (e) {
       print("ERROR: $e");
       emit(LocationError(e.toString()));
