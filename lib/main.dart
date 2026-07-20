@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quran/Services/notificationService.dart';
 import 'package:quran/UI/Screens/home/HomeScreen.dart';
 import 'package:quran/UI/Screens/splash/splash.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Africa/Cairo'));
+  await Notificationservice.instance.notiInitSetting();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   if (!prefs.containsKey("havelocation")) {
     prefs.setBool("havelocation", false);

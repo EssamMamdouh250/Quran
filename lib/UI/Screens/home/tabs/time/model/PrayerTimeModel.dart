@@ -66,7 +66,7 @@ class PrayTime {
 
   factory PrayTime.fromRaw(String name, String rawTime) {
     final parts = rawTime.split(":");
-    
+
     int hour = int.parse(parts[0]);
     String minute = parts[1];
 
@@ -79,7 +79,11 @@ class PrayTime {
       rowTime: rawTime,
       time: "$hour:$minute",
       period: period,
-      alarm: false,
+      alarm: true,
     );
+  }
+
+  void changeAlarm() {
+    alarm = !alarm;
   }
 }

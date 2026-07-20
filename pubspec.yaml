@@ -31,6 +31,9 @@ dependencies:
   geolocator: ^14.0.2
   geocoding: ^4.0.0
   dio: ^5.9.2
+  flutter_local_notifications: ^20.1.0
+  timezone:
+  flutter_native_splash: ^2.4.7
 
 dev_dependencies:
   flutter_test:

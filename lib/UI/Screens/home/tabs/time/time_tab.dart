@@ -1,7 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:quran/Services/notificationService.dart';
+import 'package:quran/Services/prayerNotificationManager.dart';
 import 'package:quran/UI/Screens/home/tabs/time/cubit/aladan_cubit.dart';
 import 'package:quran/UI/Screens/home/tabs/time/cubit/location_cubit_cubit.dart';
 import 'package:quran/UI/Screens/home/tabs/time/cubit/location_cubit_state.dart';
@@ -13,6 +13,7 @@ import 'package:quran/UI/Screens/home/tabs/time/repos/Timing_Repo.dart';
 import 'package:quran/UI/Screens/utilites/AssetsManeger.dart';
 import 'package:quran/UI/Screens/utilites/appColors.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class GetLocation extends StatefulWidget {
   const GetLocation({super.key});
@@ -22,6 +23,21 @@ class GetLocation extends StatefulWidget {
 }
 
 class _GetLocationState extends State<GetLocation> {
+  @override
+  void initState() {
+    final testTime = tz.TZDateTime.now(
+      tz.local,
+    ).add(const Duration(minutes: 2));
+    Notificationservice.instance.scheduleNotification(
+      id: 9999,
+      title: "اختبار",
+      body: "لو وصلك الإشعار ده والتطبيق مقفول، يبقى الجدولة شغالة",
+      scheduledDate: testTime,
+      
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final dio = ApiCLint.dio;
@@ -33,7 +49,18 @@ class _GetLocationState extends State<GetLocation> {
           create: (context) => AladanCubit(TimingRepe(aladhanApi: aladhanApi)),
         ),
       ],
-      child: BuildeUI(),
+      child: BlocListener<AladanCubit, AladanState>(
+        listenWhen: (previous, current) =>
+            current is AladanLoaded && previous != current,
+        listener: (context, aladanState) {
+          if (aladanState is AladanLoaded) {
+            PrayerNotificationManager().scheduleAllPrayers(
+              aladanState.times.prayTime,
+            );
+          }
+        },
+        child: BuildeUI(),
+      ),
     );
   }
 }
@@ -244,20 +271,17 @@ class _MyWidgetState extends State<BuildeUI> {
                                             color: AppColors.white,
                                           ),
                                         ),
-                                        IconButton(
-                                          onPressed: () {},
-                                          icon: alarmed
-                                              ? Icon(
-                                                  Icons.notifications_on,
-                                                  size: 36,
-                                                  color: AppColors.white,
-                                                )
-                                              : Icon(
-                                                  Icons.notifications_off,
-                                                  size: 36,
-                                                  color: AppColors.white,
-                                                ),
-                                        ),
+                                        alarmed
+                                            ? Icon(
+                                                Icons.notifications_on,
+                                                size: 36,
+                                                color: AppColors.white,
+                                              )
+                                            : Icon(
+                                                Icons.notifications_off,
+                                                size: 36,
+                                                color: AppColors.white,
+                                              ),
                                         Container(
                                           padding: EdgeInsets.symmetric(
                                             horizontal: 20,
@@ -324,7 +348,23 @@ class _MyWidgetState extends State<BuildeUI> {
                                           ),
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () async {
+                                            setState(() {
+                                              p[index].changeAlarm();
+                                            });
+                                            if (p[index].alarm) {
+                                              await PrayerNotificationManager()
+                                                  .schedulePrayer(
+                                                    prayer: p[index],
+                                                    id: index,
+                                                  );
+                                            } else {
+                                              await Notificationservice
+                                                  .instance
+                                                  .flutterLocalNotificationsPlugin
+                                                  .cancel(id: index);
+                                            }
+                                          },
                                           icon: p[index].alarm
                                               ? Icon(
                                                   Icons.notifications_on,
