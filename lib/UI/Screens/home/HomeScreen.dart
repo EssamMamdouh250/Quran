@@ -48,7 +48,7 @@ class _HomescreenState extends State<Homescreen> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsManager.Vector),
+            icon: SvgPicture.asset(AssetsManager.quran_icon),
             label: "Quran",
           ),
           BottomNavigationBarItem(

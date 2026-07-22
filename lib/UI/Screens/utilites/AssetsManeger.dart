@@ -8,7 +8,7 @@ abstract final class AssetsManager {
   static const mosqBlack = "assets/images/redingBlack.png";
   static const IcTime = "assets/images/ic_time.svg";
   static const MostRecent = "assets/images/img_most_recent.svg";
-  static const Vector = "assets/images/Vector.svg";
+  static const quran_icon = "assets/images/Vector.svg";
   static const QuranSvgRepo = "assets/images/quran-svgrepo-com .svg";
   static const SplashScreen = "assets/images/Splash Screen.png";
   static const BackGround = "assets/images/Background.png";

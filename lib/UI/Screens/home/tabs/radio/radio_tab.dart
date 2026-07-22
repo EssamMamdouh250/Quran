@@ -19,7 +19,6 @@ class _RadioTabState extends State<RadioTab> {
   bool isLoadingRadios = true;
   bool isLoadingReciters = true;
 
-  // 0 = Radio tab, 1 = Reciters tab
   int selectedTabIndex = 0;
 
   final AudioPlayer _audioPlayer = AudioPlayer();
@@ -232,8 +231,8 @@ class _RadioTabState extends State<RadioTab> {
               const SizedBox(height: 10),
               Image.asset(
                 AssetsManager.ImgLogo,
-                width: 200,
-                height: 200,
+                width: 250,
+                height: 170,
               ),
               const SizedBox(height: 10),
               Padding(
