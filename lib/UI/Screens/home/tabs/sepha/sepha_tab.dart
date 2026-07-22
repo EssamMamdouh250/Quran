@@ -68,52 +68,56 @@ class _SephaTabState extends State<SephaTab> {
             const SizedBox(height: 20),
             GestureDetector(
               onTap: onSebhaPressed,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  AnimatedRotation(
-                    turns: turns,
-                    duration: const Duration(milliseconds: 200),
-                    child: Image.asset(
-                      AssetsManager.Sephabody,
-                      width: 325,
-                      height: 325,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    azkar[azkarIndex],
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.amber,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 4.0,
-                          color: Colors.black45,
-                          offset: Offset(1,1 ),
-                        ),
-                      ]
-                    ),
-                  ),
-                  const SizedBox(height: 10),                
-                  Text(
+              child:Stack(
+  alignment: Alignment.center,
+  children: [
+    Image.asset(
+      AssetsManager.Sephabody,
+      width: 325,
+      height: 325,
+    ),
+
+    Transform.translate(
+      offset: const Offset(0, 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
             azkar[azkarIndex],
+            style: const TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.amber,
+              shadows: [
+                Shadow(
+                  blurRadius: 4,
+                  color: Colors.black45,
+                  offset: Offset(1, 1),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            '$counter',
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFFFFDE7),     
+              color: Color(0xFFFFFDE7),
               shadows: [
                 Shadow(
-                  blurRadius: 4.0,
+                  blurRadius: 4,
                   color: Colors.black54,
                   offset: Offset(1, 1),
                 ),
               ],
             ),
           ),
-                ],
-              ),
+        ],
+      ),
+    ),
+  ],
+)
             ),
           ],
         ),
