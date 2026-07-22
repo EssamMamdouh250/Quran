@@ -51,7 +51,7 @@ class PrayTime {
   });
 
   void settime(String time) {
-    this.rowTime = time;
+    rowTime = time;
     final parts = time.split(":");
     int hour = int.parse(parts[0]);
 

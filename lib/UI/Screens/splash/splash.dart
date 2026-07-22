@@ -19,6 +19,7 @@ class _SplashState extends State<Splash> {
       Navigator.pushReplacementNamed(context, Homescreen.routeName);
     });
   }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Image.asset(

@@ -23,4 +23,6 @@ abstract final class AssetsManager {
   static const backgroundtimeScreen = "assets/images/BackgroundtimeScreen.png";
   static const eveningazkar = "assets/images/EveningAzkar.png";
   static const morningazkar = "assets/images/MorningAzkar.png";
+  static const suraName = "assets/images/Sura_Nam.png";
+  static const ayaNumer = "assets/images/ayanumer.png";
 }

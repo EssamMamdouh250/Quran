@@ -16,81 +16,105 @@ class SuraDetails extends StatelessWidget {
     required this.suraIndex,
     required this.verses,
   });
-
   @override
   Widget build(BuildContext context) {
     String arabicSuraName = Constantas.arabicAuranSuras[suraIndex];
-    String suraText = "";
-    for (int i = 0; i < verses.length; i++) {
-      suraText += "${verses[i]} [${i + 1}] ";
-    }
     return Scaffold(
-      backgroundColor: AppColors.black,
-      appBar: AppBar(
-        backgroundColor: AppColors.black,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primary),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          suraName,
-          style: const TextStyle(
-            color: AppColors.primary,
-            fontSize: 18,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(AssetsManager.QuranLeftCorner,
-                width: 92,
-                height: 92,
-                ),
-                Text(
-                  arabicSuraName,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Image.asset(AssetsManager.QuranRightCorner,
-                width: 92, height: 92),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Text(
-                  suraText,
-                  textAlign: TextAlign.center,
-                  textDirection: TextDirection.rtl,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    height: 2,
-                    color: AppColors.primary,
+      backgroundColor: const Color.fromARGB(255, 228, 217, 197),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 40),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(AssetsManager.suraName),
+                          ),
+                        ),
+                        child: Center(
+                          child: SizedBox(
+                            height: 60, // أو 80
+                            child: Center(
+                              child: Text(
+                                arabicSuraName,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      if (suraIndex != 0 && suraIndex != 8)
+                        Text(
+                          "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      SizedBox(height: 10),
+                      RichText(
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        text: TextSpan(
+                          children: [
+                            for (int i = 0; i < verses.length; i++) ...[
+                              TextSpan(
+                                text: "${verses[i]} ",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  height: 2,
+                                  color: AppColors.black,
+                                ),
+                              ),
+
+                              WidgetSpan(
+                                alignment: PlaceholderAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 4,
+                                  ),
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(
+                                        AssetsManager.ayaNumer,
+                                        width: 32,
+                                        height: 32,
+                                      ),
+
+                                      Text(
+                                        "${i + 1}",
+                                        style: const TextStyle(
+                                          fontSize: 10,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ),
-          Image.asset(
-            AssetsManager.SurasDetails,
-            width: double.infinity,
-            fit: BoxFit.fill,
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -24,21 +24,6 @@ class GetLocation extends StatefulWidget {
 
 class _GetLocationState extends State<GetLocation> {
   @override
-  void initState() {
-    final testTime = tz.TZDateTime.now(
-      tz.local,
-    ).add(const Duration(minutes: 2));
-    Notificationservice.instance.scheduleNotification(
-      id: 9999,
-      title: "اختبار",
-      body: "لو وصلك الإشعار ده والتطبيق مقفول، يبقى الجدولة شغالة",
-      scheduledDate: testTime,
-      
-    );
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final dio = ApiCLint.dio;
     final aladhanApi = AladhanApi(dio: dio);
