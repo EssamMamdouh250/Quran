@@ -18,12 +18,12 @@ class Homescreen extends StatefulWidget {
 
 class _HomescreenState extends State<Homescreen> {
   int currentTabIndex = 0;
-  List<Widget> tabs = const [
-    QuranTab(),
+  List<Widget> tabs = [
+    const QuranTab(),
     AhadethTab(),
-    SephaTab(),
-    RadioTab(),
-    GetLocation(),
+    const SephaTab(),
+    const RadioTab(),
+    const GetLocation(),
   ];
 
   @override
@@ -48,12 +48,12 @@ class _HomescreenState extends State<Homescreen> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsManager.quran_icon),
+            icon: SvgPicture.asset(AssetsManager.IcHadeth),
             label: "Quran",
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsManager.IcHadeth),
-            label: "Ahadeth",
+            icon: SvgPicture.asset(AssetsManager.IcSebha),
+            label: "Azkar",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(AssetsManager.IcSebha),

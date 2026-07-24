@@ -51,9 +51,7 @@ class _SephaTabState extends State<SephaTab> {
               height: 250,
             ),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            
                 const Text(
                   "سَبِّحِ اسْمَ رَبِّكَ الأعلى",
                   style: TextStyle(
@@ -62,9 +60,7 @@ class _SephaTabState extends State<SephaTab> {
                     color: Colors.white,
                   ),
                 ),
-                const SizedBox(width: 10),
-              ],
-            ),
+             
             const SizedBox(height: 20),
             GestureDetector(
               onTap: onSebhaPressed,

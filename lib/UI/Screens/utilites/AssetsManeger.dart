@@ -25,4 +25,12 @@ abstract final class AssetsManager {
   static const morningazkar = "assets/images/MorningAzkar.png";
   static const suraName = "assets/images/Sura_Nam.png";
   static const ayaNumer = "assets/images/ayanumer.png";
+  static const mor = "assets/images/mor.png";
+  static const even = "assets/images/even.png";
+  static const pary = "assets/images/pray.png";
+  static const tasabih = "assets/images/tasabih.png";
+  static const sleep = "assets/images/sleep.png";
+  static const weak = "assets/images/weak.png";
+  static const quran = "assets/images/quran.png";
+  static const doaa = "assets/images/doaa.png";
 }
